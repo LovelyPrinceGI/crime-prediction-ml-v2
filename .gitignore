@@ -4,8 +4,8 @@ dsai_venv
 hate_crime.csv
 Hate_Crime_2023_Methodology.pdf
 source_code/hate_crime_prediction_V2.ipynb
-source_code/hate_crime_prediction_V2_.pdf
-source_code/hate_crime_prediction_V2_.html
+source_code/hate_crime_prediction_V2.pdf
+source_code/hate_crime_prediction_V2.html
 pip_log.txt
 hate_crime.csv
 Bias Types_03-13-2025.csv
@@ -14,3 +14,4 @@ hate_crime_prediction.html
 saved_model/*.pkl
 saved_model/best_multilabel_model_rf.pkl
 hate_crime
+L1 Case Study_ Regression Copy.pdf
