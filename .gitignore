@@ -11,3 +11,5 @@ Bias Types_03-13-2025.csv
 hate_crime_prediction.pdf
 hate_crime_prediction.html
 hate_crime_prediction_V2
+saved_model/*.pkl
+saved_model/best_multilabel_model_rf.pkl
