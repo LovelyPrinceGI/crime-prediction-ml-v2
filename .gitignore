@@ -3,13 +3,14 @@ hate_crime_prediction.ipynb
 dsai_venv
 hate_crime.csv
 Hate_Crime_2023_Methodology.pdf
-hate_crime_prediction_V2_.pdf
-hate_crime_prediction_V2_.html
+source_code/hate_crime_prediction_V2.ipynb
+source_code/hate_crime_prediction_V2_.pdf
+source_code/hate_crime_prediction_V2_.html
 pip_log.txt
 hate_crime.csv
 Bias Types_03-13-2025.csv
 hate_crime_prediction.pdf
 hate_crime_prediction.html
-hate_crime_prediction_V2
 saved_model/*.pkl
 saved_model/best_multilabel_model_rf.pkl
+hate_crime
