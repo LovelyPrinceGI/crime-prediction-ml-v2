@@ -40,7 +40,7 @@ layout = html.Div([
             ),
             html.A(
                 "Visit GitHub Repository",
-                href="https://github.com/LovelyPrinceGI/crime-prediction-using-ml",  
+                href="https://github.com/LovelyPrinceGI/crime-prediction-ml-v2",  
                 target="_blank",
                 className="btn btn-outline-secondary"  
             ),

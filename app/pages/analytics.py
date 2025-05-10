@@ -55,7 +55,7 @@ layout = html.Div([
                         ) 
                     )
                 ]),
-                className="shadow-sm rounded-lg border border-light mb-4",
+                className="shadow-lg rounded-lg border border-light mb-4",
                 style={"minHeight": "300px", "box-shadow": "none"}  # Ensure consistent card style
             ),
             md=6  # Set column to take half the width of the row
@@ -152,7 +152,7 @@ layout = html.Div([
                         ) 
                     )
                 ]),
-                className="shadow-sm rounded-lg border border-light mb-4",
+                className="shadow-lg rounded-lg border border-light mb-4",
                 style={"minHeight": "300px", "box-shadow": "none"}
             ),
             md=12  # Set this to full width for the trend graph
