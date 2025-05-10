@@ -78,7 +78,7 @@ Performance comparison and feature importances are visualized through bar charts
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/LovelyPrinceGI/crime-prediction-using-ml.git
+   git clone https://github.com/LovelyPrinceGI/crime-prediction-ml-v2
 
 2. Create and activate the virtual environment:
 
