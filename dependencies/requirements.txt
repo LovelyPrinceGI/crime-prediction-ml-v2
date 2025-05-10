@@ -8,4 +8,7 @@ plotly
 jupyterlab
 ipykernel
 nltk
-streamlit
+dash
+dash-iconify
+plotly
+dash_bootstrap_components
