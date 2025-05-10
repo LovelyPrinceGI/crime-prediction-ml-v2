@@ -19,3 +19,18 @@ hate_crime_prediction_V2_.html
 hate_crime_prediction_V2_.pdf
 tree.txt
 updated_hate_crime.csv
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+# Ignore virtual environment directories
+venv/
+.env/
+
+# Ignore IDE-specific files (for example, VS Code)
+.vscode/
+
+# Ignore system-specific files (e.g., macOS)
+.DS_Store
