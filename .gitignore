@@ -34,3 +34,5 @@ venv/
 
 # Ignore system-specific files (e.g., macOS)
 .DS_Store
+
+saved_model/
