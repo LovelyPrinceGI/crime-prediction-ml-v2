@@ -36,8 +36,9 @@ Based on correlation analysis and feature importance from models:
 | Feature Name             | Description                                 |
 |--------------------------|---------------------------------------------|
 | `total_offender_count`   | Total number of offenders in a crime        |
-| `total_individual_victims` | Total number of victims involved         |
+| `total_individual_victims` | Unique number of individuals who were victims, regardless of how many times they were victimized |
 | `crime_type_violent`     | Whether the crime was violent or not       |
+| `victim_count`           |  Total number of victimization incidents, including repeated crimes against the same person |
 | `area_type_Urban`        | Indicates if the crime occurred in urban areas |
 | `offender_ethnicity_Not Hispanic or Latino` | The ethicity of the offender, indicating the race of the offender who is excluded from a person of Cuban, Mexican  Puerto Rican, South or Central American, or other Spanish culture or origin that wasn't being in common races in USA.|
 
@@ -112,6 +113,6 @@ Performance comparison and feature importances are visualized through bar charts
 
 ### **Author**
 
-- Patsakorn Tangkachaiyanunt 
+- Patsakorn Tangkachaiyanunt, IM student in AIT
 
-- Shreeyukta Pradhanang
+- Shreeyukta Pradhanang, CS student in AIT
