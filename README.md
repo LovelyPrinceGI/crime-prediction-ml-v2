@@ -4,6 +4,7 @@ A machine learning project aimed at analyzing and predicting crime patterns usin
 
 ## **📁 Project Structure**
 
+ ```bash
 CP_Project_V2/
 ├── app/
 │   └── main.py
@@ -16,6 +17,7 @@ CP_Project_V2/
 │   └── hate_crime_prediction_V3.ipynb
 ├── .gitignore
 └── README.md
+```
 
 ## **🎯 Objectives**
 
