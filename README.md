@@ -1,6 +1,6 @@
 # **🔍 Crime Prediction using Machine Learning**
 
-A machine learning project aimed at analyzing and predicting crime patterns using various features such as offender count, victim count, crime type, area type and ethnicity of offender.
+A machine learning project aimed at analyzing and predicting crime patterns using a multi-label classifier that predicts whether each crime instance belongs to any of 4 types of hate crimes (Disability, Gender, Racial, Religion).
 
 ## **📁 Project Structure**
 
