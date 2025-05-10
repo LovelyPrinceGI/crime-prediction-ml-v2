@@ -106,7 +106,7 @@ Performance comparison and feature importances are visualized through bar charts
 
 - `seaborn`
 
-- `streamlit (for optional app deployment)`
+- `dash (for optional app deployment)`
 
 `Note`: All dependencies are listed in dependencies/requirements.txt.
 
