@@ -43,7 +43,7 @@ sidebar = html.Div([
     dbc.Nav([
         dbc.NavLink(
             [DashIconify(icon="mdi:sparkles", width=20, className="me-2"), "Prediction"],
-            href="/llm-analysis", active="exact"
+            href="/prediction", active="exact"
         ),
     ], vertical=True, pills=True, className="mb-4"),
 
@@ -77,4 +77,5 @@ app.layout = html.Div([
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
+

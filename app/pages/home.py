@@ -86,11 +86,11 @@ bias_options = [{"label": b, "value": b} for b in sorted(df["bias_desc"].dropna(
 # ], className="container")
 
 layout = html.Div([
-    html.H2("📊 U.S. Hate Crime Dashboard", className="mb-2 text-center fw-bold"),
+    html.H2("U.S. Hate Crime Dashboard", className="mb-2 text-center fw-bold"),
 
     # 🔹 SECTION 1: Map
     html.Div([
-        html.H4("🗺️ Hate Crime Distribution Map", className="text-dark mb-4"),
+        html.H4("Hate Crime Distribution Map", className="text-dark mb-4"),
         html.Div([
             html.Div([
                 html.Label("Filter by Year:", className="text-dark"),
