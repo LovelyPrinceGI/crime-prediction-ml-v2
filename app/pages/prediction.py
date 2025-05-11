@@ -20,17 +20,32 @@ LABELS = [
     "Religion Hate Crime"
 ]
 
+location_options = [
+    "Home", "Street", "Transport", "School", "Govt", "Religious",
+    "Retail", "Medical", "Outdoor", "Worksite", "Community", "Cyber",
+    "Entertainment", "Other"
+]
+
+division_options = [
+    "East South Central", "Middle Atlantic", "Mountain", "New England",
+    "Pacific", "South Atlantic", "U.S. Territories", "West North Central", "West South Central"
+]
+
+ethnicity_options = [
+    "Multiple", "Not Hispanic or Latino", "Not Specified", "Unknown"
+]
+
 layout = dbc.Container([
     html.H2("Predict Hate Crime Bias Type", className="my-4 text-center"),
 
     dbc.Row([
         dbc.Col([
-            dbc.Label("Total Offender Count"),
-            dcc.Input(id='offender-count', type='number', min=0, className="form-control")
+            dbc.Label("Juvenile Victim Count"),
+            dcc.Input(id='juvenile-victim-count', type='number', min=0, className="form-control")
         ]),
         dbc.Col([
-            dbc.Label("Victim Count"),
-            dcc.Input(id='victim-count', type='number', min=0, className="form-control")
+            dbc.Label("Adult Victim Count"),
+            dcc.Input(id='adult-victim-count', type='number', min=0, className="form-control")
         ]),
     ], className="mb-3"),
 
@@ -39,6 +54,24 @@ layout = dbc.Container([
             dbc.Label("Total Individual Victims"),
             dcc.Input(id='individual-victims', type='number', min=0, className="form-control")
         ]),
+        dbc.Col([
+            dbc.Label("Juvenile Offender Count"),
+            dcc.Input(id='juvenile-offender-count', type='number', min=0, className="form-control")
+        ]),
+    ], className="mb-3"),
+
+    dbc.Row([
+        dbc.Col([
+            dbc.Label("Adult Offender Count"),
+            dcc.Input(id='adult-offender-count', type='number', min=0, className="form-control")
+        ]),
+        dbc.Col([
+            dbc.Label("Total Offender Count"),
+            dcc.Input(id='total-offender-count', type='number', min=0, className="form-control")
+        ]),
+    ], className="mb-3"),
+
+    dbc.Row([
         dbc.Col([
             dbc.Label("Crime Type (Violent?)"),
             dcc.Dropdown(
@@ -51,33 +84,36 @@ layout = dbc.Container([
                 placeholder="Select"
             )
         ]),
+        dbc.Col([
+            dbc.Label("Division Name"),
+            dcc.Dropdown(
+                id='division-name',
+                options=[{'label': name, 'value': name} for name in division_options],
+                className="form-control",
+                placeholder="Select"
+            )
+        ])
     ], className="mb-3"),
 
     dbc.Row([
         dbc.Col([
-            dbc.Label("Area Type (Urban?)"),
+            dbc.Label("Offender Ethnicity"),
             dcc.Dropdown(
-                id='is-urban',
-                options=[
-                    {'label': 'Yes', 'value': 1},
-                    {'label': 'No', 'value': 0}
-                ],
+                id='offender-ethnicity',
+                options=[{'label': name, 'value': name} for name in ethnicity_options],
                 className="form-control",
                 placeholder="Select"
             )
         ]),
         dbc.Col([
-            dbc.Label("Offender Ethnicity: Not Hispanic or Latino?"),
+            dbc.Label("Location Group"),
             dcc.Dropdown(
-                id='is-not-hispanic',
-                options=[
-                    {'label': 'Yes', 'value': 1},
-                    {'label': 'No', 'value': 0}
-                ],
+                id='location-group',
+                options=[{"label": name, "value": name} for name in location_options],
                 className="form-control",
                 placeholder="Select"
             )
-        ]),
+        ])
     ], className="mb-4"),
 
     dbc.Row([
@@ -94,35 +130,54 @@ layout = dbc.Container([
 @dash.callback(
     Output("prediction-output", "children"),
     Input("predict-btn", "n_clicks"),
-    State("offender-count", "value"),
-    State("is-violent", "value"),
-    State("victim-count", "value"),
+    State("juvenile-victim-count", "value"),
+    State("adult-victim-count", "value"),
     State("individual-victims", "value"),
-    State("is-urban", "value"),
-    State("is-not-hispanic", "value")
+    State("juvenile-offender-count", "value"),
+    State("adult-offender-count", "value"),
+    State("total-offender-count", "value"),
+    State("is-violent", "value"),
+    State("division-name", "value"),
+    State("offender-ethnicity", "value"),
+    State("location-group", "value")
 )
-def predict_bias(n_clicks, offender_count, is_violent, victim_count, individual_victims, is_urban, is_not_hispanic):
+def predict_bias(n_clicks, jvc, avc, tiv, joc, aoc, toc, is_violent, division, ethnicity, location_group):
     if n_clicks is None:
         return ""
 
-    if any(v is None for v in [offender_count, is_violent, victim_count, individual_victims, is_urban, is_not_hispanic]):
+    if any(v is None for v in [jvc, avc, tiv, joc, aoc, toc, is_violent, division, ethnicity, location_group]):
         return dbc.Alert("⚠️ All fields are required to get a prediction.", color="danger")
 
-    input_data = pd.DataFrame([{
-        'total_offender_count': offender_count,
+    input_data = {
+        'juvenile_victim_count': jvc,
+        'adult_victim_count': avc,
+        'total_individual_victims': tiv,
+        'juvenile_offender_count': joc,
+        'adult_offender_count': aoc,
+        'total_offender_count': toc,
         'crime_type_Violent': is_violent,
-        'victim_count': victim_count,
-        'total_individual_victims': individual_victims,
-        'area_type_Urban': is_urban,
-        'offender_ethnicity_Not Hispanic or Latino': is_not_hispanic
-    }])
+    }
 
-    proba = model.predict_proba(input_data)
-    prediction = model.predict(input_data)[0]
+    # One-hot encode division
+    for div in division_options:
+        input_data[f'division_name_{div}'] = 1 if division == div else 0
 
+    # One-hot encode ethnicity
+    for eth in ethnicity_options:
+        input_data[f'offender_ethnicity_{eth}'] = 1 if ethnicity == eth else 0
+
+    # One-hot encode location group
+    for loc in location_options:
+        input_data[f"location_group_{loc}"] = 1 if location_group == loc else 0
+
+    input_df = pd.DataFrame([input_data])
+    proba = model.predict_proba(input_df)
+    prediction = model.predict(input_df)[0]
+
+    print("Proba", proba, "roba", prediction)
     cards = []
     for i, label in enumerate(LABELS):
-        conf = proba[i][0][1] * 100
+        conf = proba[i][0, 1] * 100  # Correct indexing
         is_positive = prediction[i] == 1
         border_color = "#28a745" if is_positive else "#dc3545"
         icon = "✅" if is_positive else "❌"
@@ -134,8 +189,9 @@ def predict_bias(n_clicks, offender_count, is_violent, victim_count, individual_
                     html.H5(f"{icon} {'Yes' if is_positive else 'No'}", className="card-title text-center mb-1"),
                     html.P(f"Confidence: {conf:.2f}%", className="card-text text-center text-muted")
                 ])
-            ], style={"backgroundColor": "#ffffff", "border": f"2px solid {border_color}"}, className="rounded-4 shadow-sm"), md=3
+            ], style={"backgroundColor": "#ffffff", "border": f"2px solid {border_color}"}, className="rounded-4 shadow-sm"), 
+            md=3
         )
         cards.append(card)
-
     return cards
+

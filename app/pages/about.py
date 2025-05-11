@@ -34,7 +34,7 @@ layout = html.Div([
         html.Div([
             html.A(
                 "View the Dataset",
-                href="https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/ucr/hate-crime", 
+                href="https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads", 
                 target="_blank", 
                 className="btn btn-outline-primary me-2" 
             ),
